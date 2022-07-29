@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  aws_tools:
+    build:
+      context: .
+    image: "aws-tools"
+    volumes:
+      - "${HOME}/.aws:/home/aws/.aws:ro"
+      - ".:/home/aws"
