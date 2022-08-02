@@ -1,0 +1,9 @@
+.bundle
+.vscode-server
+.gitconfig
+.ssh
+.bash_history
+.devcontainer/.onCreateCommandMarker
+.devcontainer/.postCreateCommandMarker
+.devcontainer/.updateContentCommandMarker
+tmp

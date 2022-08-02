@@ -1,0 +1,10 @@
+source "http://rubygems.org"
+
+gem "awesome_print"
+gem "aws-sdk-ssm"
+gem "nokogiri"
+gem "optimist"
+gem "pry"
+gem "pry-byebug"
+gem "rufo"
+gem "uuid"
