@@ -15,10 +15,22 @@ module AWSLibs
           value: value,
           key_id: key_id,
           type: "SecureString",
-          overwrite: overwrite
+          overwrite: overwrite,
         })
       rescue => exception
         msg = format("Error creating SSM paramater. Error Message: %{error}", error: exception.message)
+        raise Custom::CustomException, msg
+      end
+    end
+
+    def read_secret(name: string)
+      begin
+        resp = @aws_ssm_client.get_parameter({ name: name,
+                                              with_decryption: true })
+
+        return resp.parameter.value
+      rescue => exception
+        msg = format("Error reading SSM paramater. Error Message: %{error}", error: exception.message)
         raise Custom::CustomException, msg
       end
     end
