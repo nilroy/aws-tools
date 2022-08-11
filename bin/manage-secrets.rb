@@ -15,10 +15,12 @@ class SecretManager
     unless @action == "read"
       @secret_string = secret_string.nil? ? File.read(secret_file) : secret_string
     end
-    if kms_key.split("/").first == "alias"
-      @kms_key = kms_key
-    else
-      @kms_key = "alias/#{kms_key}"
+    unless kms_key.nil?
+      if kms_key.split("/").first == "alias"
+        @kms_key = kms_key
+      else
+        @kms_key = "alias/#{kms_key}"
+      end
     end
 
     @description = description
@@ -55,7 +57,12 @@ class SecretManager
   end
 
   def read_secret
-    @log.info("Not implemented")
+    begin
+      secret = @secret_client.read_secret(name: @name)
+      puts(secret)
+    rescue Custom::CustomException => exception
+      @log.error(exception.message)
+    end
   end
 
   def update_secret
